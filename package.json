@@ -1,0 +1,73 @@
+{
+  "name": "@evojs/callsite",
+  "version": "0.1.0",
+  "description": "Nodejs callsite loader",
+  "license": "MIT",
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "scripts": {
+    "prebuild": "rm -rf dist/",
+    "build": "tsc --build tsconfig.build.json && node tools/build.js",
+    "prepublishOnly": "npm run build && npm run test && node tools/prepublish.js",
+    "release": "RELEASE_MODE=1 npm run prepublishOnly && npm publish --access public dist/",
+    "test": "jest --coverage --detectOpenHandles",
+    "lint": "eslint \"src/**/*.ts\" -f codeframe --fix"
+  },
+  "dependencies": {
+    "source-map-support": "^0.5.21"
+  },
+  "devDependencies": {
+    "@evojs/eslint-plugin": "~4.0.1",
+    "@types/jest": "^29.1.2",
+    "@types/node": "^16.11.64",
+    "@types/source-map-support": "^0.5.6",
+    "@typescript-eslint/eslint-plugin": "^5.39.0",
+    "@typescript-eslint/parser": "^5.39.0",
+    "eslint": "^8.24.0",
+    "glob": "^8.0.3",
+    "jest": "^29.1.2",
+    "ts-jest": "^29.0.3",
+    "typescript": "^4.8.4"
+  },
+  "engines": {
+    "node": "^10.12.0 || >=12.0.0"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "ts"
+    ],
+    "rootDir": "./",
+    "testEnvironment": "node",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(ts|js)$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsconfig": "tsconfig.spec.json"
+      }
+    }
+  },
+  "author": {
+    "name": "Shamil Sultanov",
+    "email": "shamil.amirovich@gmail.com"
+  },
+  "keywords": [
+    "nodejs",
+    "evojs",
+    "logger"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evotool/js-callsite.git"
+  },
+  "bugs": {
+    "url": "https://github.com/evotool/js-callsite/issues"
+  },
+  "homepage": "https://github.com/evotool/js-callsite#readme"
+}
