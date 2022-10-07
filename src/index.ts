@@ -1,4 +1,5 @@
-import { install, wrapCallSite, CallSite } from 'source-map-support';
+import type { CallSite } from 'source-map-support';
+import { install, wrapCallSite } from 'source-map-support';
 
 install();
 
@@ -16,16 +17,16 @@ export class Callsite {
   readonly line?: number;
   readonly column?: number;
 
-  readonly type?: string;
-  readonly func?: string;
+  readonly typeName?: string;
+  readonly functionName?: string;
 
   protected constructor(nodeCallsite: NodeJS.CallSite) {
     this.source = nodeCallsite.getFileName() ?? undefined;
     this.line = nodeCallsite.getLineNumber() ?? undefined;
     this.column = nodeCallsite.getColumnNumber() ?? undefined;
 
-    this.type = nodeCallsite.getTypeName() ?? undefined;
-    this.func = nodeCallsite.getMethodName() ?? nodeCallsite.getFunctionName() ?? undefined;
+    this.typeName = nodeCallsite.getTypeName() ?? undefined;
+    this.functionName = nodeCallsite.getMethodName() ?? nodeCallsite.getFunctionName() ?? undefined;
   }
 
   /**
@@ -40,6 +41,7 @@ export class Callsite {
 
   protected static _getNodeCallsites(limit: number): NodeJS.CallSite[] {
     const prevStackTraceLimit = Error.stackTraceLimit;
+
     Error.stackTraceLimit = INTERNAL_CALLSITES_SHIFT + limit;
     Error.prepareStackTrace = OVERRIDED_PREPARE_STACK_TRACE;
 
