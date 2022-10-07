@@ -3,6 +3,7 @@ import { Callsite } from '../src';
 describe('callsite', () => {
   it('should create callsite', (done) => {
     const callsite = Callsite.get()[0];
+
     expect(callsite).toBeTruthy();
     expect(typeof callsite.source).toBe('string');
     expect(typeof callsite.line).toBe('number');
