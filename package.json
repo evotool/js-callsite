@@ -45,12 +45,12 @@
     "testEnvironment": "node",
     "testRegex": ".spec.ts$",
     "transform": {
-      "^.+\\.(ts|js)$": "ts-jest"
-    },
-    "globals": {
-      "ts-jest": {
-        "tsconfig": "tsconfig.spec.json"
-      }
+      "^.+\\.(ts|js)$": [
+        "ts-jest",
+        {
+          "tsconfig": "tsconfig.spec.json"
+        }
+      ]
     }
   },
   "author": {
